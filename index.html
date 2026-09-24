@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Installable shell for the Saiyan Health Console.
+     Host this folder on any HTTPS static host (e.g. GitHub Pages), set APP_URL below to your Apps Script /exec URL,
+     open it in Chrome on Android and choose "Install app". It holds no health data: the dashboard still loads from
+     Google, behind your Google sign-in and the account check in Code.gs. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0C1F">
+<meta name="color-scheme" content="dark">
+<title>Saiyan Health</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+html,body{margin:0;height:100%;background:#0A0C1F;color:#EEF0FF;font:15px/1.5 system-ui,sans-serif}
+iframe{position:fixed;inset:0;width:100%;height:100%;border:0;background:#0A0C1F}
+.setup{max-width:34em;margin:15vh auto;padding:0 20px}
+code{background:#1A1F40;padding:2px 6px;border-radius:6px}
+</style>
+</head>
+<body>
+<script>
+// Paste your deployment URL here, the one ending in /exec (Deploy > Manage deployments).
+const APP_URL = 'https://script.google.com/macros/s/AKfycbww78TOxI8MnyG0xekEgwa_Jiw_gjjgto76kbzB9ZZmspwybnLi1ZXnN-UfiMWkUTVj/exec';
+if (/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(APP_URL) || APP_URL === '/') {
+  const f = document.createElement('iframe');
+  f.src = APP_URL;
+  f.title = 'Saiyan Health Console';
+  f.allow = 'clipboard-write';
+  document.body.append(f);
+} else {
+  document.body.innerHTML = '<div class="setup"><h1>Almost there</h1><p>Set <code>APP_URL</code> in this file to your Apps Script web app URL (it ends in <code>/exec</code>), then reload.</p></div>';
+}
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
